@@ -24,6 +24,31 @@ Linear의 제품 중심 구성·어두운 배경·절제된 정보 위계를 참
 
 절대 경로의 `server.mjs`를 Node로 실행하고 출력된 Local 주소를 연다. `validate.mjs`는 파일 참조·화면 자산·배포 메타데이터·비밀정보 포함 여부를 검사한다.
 
+## Netlify 배포
+
+빌드 의존성이 없는 정적 사이트다. `netlify.toml`에서 정적 검증 명령과 배포 폴더 `dist`를 지정한다.
+
+- 저장소: https://github.com/FormationLabs/f1soft-aiplatform-homepage
+- 운영 사이트: https://f1soft-ai-solutions.netlify.app
+- 운영 브랜치: `main`
+- 검증 명령: `node validate.mjs`
+- 배포 폴더: `dist`
+
+`main` 브랜치에 push하면 GitHub webhook을 통해 Netlify가 검증 후 자동 배포한다. 검증이 실패하면 기존 운영 배포가 유지된다. Netlify는 저장소 전용 읽기 전용 deploy key로 소스를 가져온다.
+
+수정 후 다음과 같이 배포한다.
+
+```sh
+node validate.mjs
+git add .
+git commit -m "Update homepage"
+git push origin main
+```
+
+진행 상태와 로그는 https://app.netlify.com/projects/f1soft-ai-solutions/deploys 에서 확인한다. GitHub webhook과 deploy key는 저장소 설정에서 관리한다.
+
+Netlify 로컬 프로젝트 연결 정보는 `.netlify/`에 저장되며 Git에서 제외한다. 개인 인증 토큰이나 webhook 주소는 소스에 저장하지 않는다. Sites의 기존 사이트와 접근 설정은 별도로 유지된다.
+
 ## 구성
 
 - `dist/`: 배포할 정적 파일

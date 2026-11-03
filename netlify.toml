@@ -1,0 +1,3 @@
+[build]
+  command = "node validate.mjs"
+  publish = "dist"
