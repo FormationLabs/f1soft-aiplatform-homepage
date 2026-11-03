@@ -31,6 +31,7 @@ Linear의 제품 중심 구성·어두운 배경·절제된 정보 위계를 참
 - 저장소: https://github.com/FormationLabs/f1soft-aiplatform-homepage
 - 운영 사이트: https://f1soft-ai-solutions.netlify.app
 - 운영 브랜치: `main`
+- 빌드 환경: Node.js 22
 - 검증 명령: `node validate.mjs`
 - 배포 폴더: `dist`
 
