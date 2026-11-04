@@ -7,13 +7,13 @@
 }
 
 :root {
-    --bg: #000;
+    --bg: #020515;
     --surface: #101114;
     --surface2: #15171b;
     --text: #ffffff;
     --muted: #95979f;
     --dim: #737781;
-    --line: #24262c;
+    --line: rgba(41, 112, 255, 0.18);
     --blue: #8ba8ed;
     --green: #91bdac;
     --font: Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -25,7 +25,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     scroll-padding-top: 100px
 }
 
@@ -167,7 +167,7 @@ ul {
     z-index: 30;
     background: rgba(2, 5, 21, .88);
     backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(255, 255, 255, .07)
+    border-bottom: 1px solid rgba(41, 112, 255, 0.2)
 }
 
 .nav-shell {
@@ -240,8 +240,9 @@ ul {
 }
 
 .main-nav a {
-    font-size: 13px;
-    color: #a0a2aa;
+    font-size: 15px;
+    font-weight: 600;
+    color: #b6bcda;
     display: flex;
     align-items: center;
     gap: 3px;
@@ -267,9 +268,9 @@ ul {
     gap: 14px;
     align-items: center;
     padding: 0 14px;
-    border: 1px solid #3b3e46;
+    border: 1px solid rgba(41, 112, 255, 0.28);
     border-radius: 6px;
-    background: #191b20;
+    background: rgba(14, 22, 46, 0.7);
     font-size: 12px;
     font-weight: 550
 }
@@ -286,14 +287,14 @@ ul {
 }
 
 .eyebrow {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: .12em;
     color: #a4a7b1
 }
 
 .hero {
-    padding-top: 76px
+    padding-top: 96px
 }
 
 .hero-eyebrow {
@@ -315,21 +316,34 @@ ul {
     margin: 0 2px
 }
 
+#hero-title,
 .hero h1 {
     font-size: 76px;
-    line-height: 1.14;
-    letter-spacing: -.06em
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -.06em;
+    background: linear-gradient(92deg, #386cd4 1.25%, #AFDFFF 73.31%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    width: fit-content;
+    max-width: 100%;
 }
 
+#hero-title span,
 .hero h1 span {
-    color: #a9acb6
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-description {
     margin-top: 26px;
-    color: #a0a2ac;
-    font-size: 18px;
-    line-height: 1.8;
+    color: #e5e8f0;
+    font-size: 18px !important;
+    line-height: 1.4;
     letter-spacing: -.022em
 }
 
@@ -348,21 +362,21 @@ ul {
     min-height: 43px;
     border-radius: 7px;
     padding: 0 18px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     transition: background .18s, transform .18s;
     white-space: nowrap
 }
 
 .button-light {
-    background: #e9ebef;
-    border: 1px solid #f5f6f8;
-    color: #17181c;
-    box-shadow: inset 0 1px 0 #fff
+    background: #0c0f1b;
+    border: 1px solid #303f5e;
+    color: #aebfe3;
+    box-shadow: inset 0 1px 0 #090f2b;
 }
 
 .button-light:hover {
-    background: #fff;
+    background: #000;
     transform: translateY(-1px)
 }
 
@@ -376,7 +390,7 @@ ul {
     gap: 10px;
     align-items: center;
     color: #c1c4cd;
-    font-size: 13px;
+    font-size: 14px;
     transition: color .2s
 }
 
@@ -386,18 +400,20 @@ ul {
 }
 
 .hero-showcase {
-    padding-top: 60px;
+    padding-top: 70px;
     scroll-margin-top: 20px
 }
 
 .product-tabs {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    border: 1px solid var(--line);
+    border: 1px solid rgba(41, 112, 255, 0.22);
     border-bottom: 0;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
-    background: #101115
+    background: rgba(8, 14, 34, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .product-tab {
@@ -406,57 +422,63 @@ ul {
     align-items: center;
     gap: 9px;
     padding: 16px 19px;
-    color: #8d909a;
+    color: #8c9bb5;
     white-space: nowrap;
     position: relative;
     transition: color .2s, background .2s;
     min-height: 58px;
-    font-size: 13px;
-    font-weight: 550
+    font-size: 14px;
+    font-weight: 550;
 }
 
 .product-tab+.product-tab {
-    border-left: 1px solid var(--line)
+    border-left: 1px solid rgba(41, 112, 255, 0.18);
 }
 
 .product-tab .icon {
     width: 18px;
-    height: 18px
+    height: 18px;
 }
 
 .product-tab.active {
-    background: #191c22;
-    color: #eff1f6
+    background: rgba(13, 22, 48, 0.92);
+    color: #5294ff;
+}
+
+.product-tab.active .tab-caption {
+    color: #8bb7f5;
 }
 
 .product-tab.active:after {
     content: '';
     height: 2px;
-    background: #a5bdf3;
+    background: linear-gradient(90deg, #2970FF, #AFDFFF);
     position: absolute;
     left: 18px;
     right: 18px;
-    bottom: 0
+    bottom: 0;
 }
 
 .product-tab:hover {
-    color: #e2e5ed;
-    background: #17191e
+    color: #ffffff;
+    background: rgba(11, 18, 40, 0.65);
 }
 
 .tab-caption {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
-    color: #777c87;
-    margin-left: auto
+    color: #7b8ba6;
+    margin-left: 0;
 }
 
 .browser-window {
-    border: 1px solid #34373f;
-    background: #15171c;
+    border: 1px solid rgba(41, 112, 255, 0.22);
+    background: rgba(8, 14, 32, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     overflow: hidden;
     border-radius: 0 0 8px 8px;
-    box-shadow: 0 30px 85px -40px #000
+    box-shadow: 0 30px 85px -40px rgba(0, 0, 0, 0.9), 0 0 35px -5px rgba(41, 112, 255, 0.08);
 }
 
 .window-toolbar {
@@ -465,9 +487,11 @@ ul {
     align-items: center;
     gap: 18px;
     padding: 0 15px;
-    color: #9da1ad;
-    font-size: 10px;
-    letter-spacing: .01em
+    color: #9daec8;
+    font-size: 12px;
+    letter-spacing: .01em;
+    border-bottom: 1px solid rgba(41, 112, 255, 0.12);
+    background: rgba(12, 20, 44, 0.65);
 }
 
 .window-dots {
@@ -489,8 +513,8 @@ ul {
 .window-status {
     margin-left: auto;
     color: #b1bacb;
-    font-size: 9px;
-    border: 1px solid #3d414b;
+    font-size: 12px;
+    border: 1px solid rgba(41, 112, 255, 0.28);
     border-radius: 4px;
     padding: 1px 7px
 }
@@ -519,15 +543,16 @@ ul {
     display: flex;
     align-items: center;
     gap: 7px;
-    background: rgba(15, 18, 25, .9);
-    border: 1px solid #454a55;
+    background: rgba(10, 18, 42, 0.9);
+    border: 1px solid rgba(41, 112, 255, 0.35);
     border-radius: 5px;
     padding: 6px 10px;
-    font-size: 10px;
+    font-size: 12px;
     color: #eef1f7;
     opacity: 0;
     transform: translateY(4px);
-    transition: opacity .2s, transform .2s
+    transition: opacity .2s, transform .2s;
+    z-index: 2;
 }
 
 .enlarge-hint .icon {
@@ -541,13 +566,30 @@ ul {
     transform: none
 }
 
+/* Tab preview image transparent navy overlay for unified tone */
+.hero-window .image-button::after,
+.product-figure .image-button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(2, 6, 26, 0.05);
+    pointer-events: none;
+    transition: opacity .25s ease;
+    z-index: 1;
+}
+
+.hero-window .image-button:hover::after,
+.product-figure .image-button:hover::after {
+    opacity: 0;
+}
+
 .showcase-caption {
     display: flex;
     gap: 25px;
     justify-content: space-between;
     margin-top: 14px;
     color: #858a97;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.65
 }
 
@@ -592,7 +634,7 @@ ul {
 }
 
 .existing-system-strip .system-etc {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     color: #747985
 }
@@ -606,7 +648,7 @@ ul {
 }
 
 .section-number {
-    font-size: 10px;
+    font-size: 12px;
     color: #777e8c;
     letter-spacing: .11em;
     margin-bottom: 30px;
@@ -615,35 +657,52 @@ ul {
 
 .intro-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start
+    grid-template-columns: 380px 1fr;
+    gap: 70px;
+    align-items: end;
 }
 
+.intro-left {
+    display: flex;
+    flex-direction: column;
+}
+
+#intro-title,
+#architecture-title,
+#roadmap-title,
 .intro-grid h2 {
     font-size: 43px;
-    line-height: 1.25
+    line-height: 1.25;
+    background: linear-gradient(92deg, #2970FF 1.25%, #AFDFFF 73.31%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    width: fit-content;
+    max-width: 100%;
 }
 
+.intro-desc,
 .intro-grid>p {
     font-size: 15px;
     color: #9398a4;
-    line-height: 1.9;
-    max-width: 455px;
-    padding-top: 7px;
-    letter-spacing: -.02em
+    line-height: 1.6;
+    max-width: 380px;
+    margin-top: 26px;
+    padding-top: 0;
+    letter-spacing: -.02em;
 }
 
 .principle-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 45px;
-    margin-top: 61px
+    gap: 36px;
+    margin-top: 0;
 }
 
 .principle-row>div {
-    padding-top: 21px;
-    border-top: 1px solid #20232a
+    padding-top: 0;
+    border-top: none
 }
 
 .principle-row .icon {
@@ -658,8 +717,8 @@ ul {
 }
 
 .principle-row p {
-    font-size: 13px;
-    line-height: 1.85;
+    font-size: 14px;
+    line-height: 1.5;
     color: #858b99
 }
 
@@ -694,17 +753,17 @@ ul {
     display: inline-flex;
     align-items: center;
     min-height: 23px;
-    font-size: 10px;
+    font-size: 12px;
     color: #b6becf;
     padding: 2px 9px;
-    border: 1px solid #313744;
+    border: 1px solid rgba(41, 112, 255, 0.28);
     border-radius: 20px;
-    background: #13171e;
+    background: rgba(14, 24, 52, 0.75);
     white-space: nowrap
 }
 
 .category-label {
-    font-size: 9px;
+    font-size: 12px;
     color: #777f8d;
     letter-spacing: .1em;
     margin-left: auto
@@ -718,15 +777,26 @@ ul {
     margin-bottom: 38px
 }
 
+#agent-title,
+#ops-title,
+#bi-title,
+#studio-title,
 .product-heading h2 {
     font-size: 43px;
-    line-height: 1.22
+    line-height: 1.22;
+    background: linear-gradient(92deg, #2970FF 1.25%, #AFDFFF 73.31%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    width: fit-content;
+    max-width: 100%;
 }
 
 .product-heading>div>p {
     font-size: 15px;
     color: #969daa;
-    line-height: 1.9;
+    line-height: 1.5;
     letter-spacing: -.025em
 }
 
@@ -735,15 +805,15 @@ ul {
 }
 
 .agent-concept-bar {
-    border: 1px solid #303641;
+    border: 1px solid rgba(41, 112, 255, 0.22);
     border-bottom: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 12px 16px;
     border-radius: 9px 9px 0 0;
-    background: #12161d;
-    font-size: 10px;
+    background: rgba(12, 20, 44, 0.85);
+    font-size: 12px;
     color: #96a4bb
 }
 
@@ -762,7 +832,7 @@ ul {
 
 .agent-concept-bar p {
     color: #a2a8b5;
-    font-size: 10px;
+    font-size: 12px;
     display: flex;
     gap: 15px
 }
@@ -772,7 +842,7 @@ ul {
 }
 
 .concept-label {
-    font-size: 9px;
+    font-size: 12px;
     color: #737f95
 }
 
@@ -781,7 +851,7 @@ ul {
 }
 
 .product-figure>.image-button {
-    border: 1px solid #343943;
+    border: 1px solid rgba(41, 112, 255, 0.22);
     border-radius: 8px;
     overflow: hidden
 }
@@ -793,7 +863,7 @@ ul {
 .product-figure figcaption {
     margin-top: 12px;
     color: #8b929e;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.75
 }
 
@@ -813,7 +883,7 @@ ul {
 
 .step-index {
     color: #747e90;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 3px;
     grid-row: 1/3;
     font-variant-numeric: tabular-nums
@@ -826,7 +896,7 @@ ul {
 
 .agent-workflow p {
     font-size: 12px;
-    line-height: 1.85;
+    line-height: 1.5;
     color: #858e9e;
     margin-top: 9px
 }
@@ -837,7 +907,7 @@ ul {
     gap: 9px;
     padding-top: 22px;
     margin-top: 27px;
-    border-top: 1px solid #20252e
+    border-top: 1px solid rgba(41, 112, 255, 0.18)
 }
 
 .quiet-note .icon {
@@ -848,8 +918,8 @@ ul {
 }
 
 .quiet-note p {
-    font-size: 10px;
-    line-height: 1.9;
+    font-size: 12px;
+    line-height: 1.5;
     color: #7f8999
 }
 
@@ -863,34 +933,37 @@ ul {
 .gallery-tabs {
     display: flex;
     padding: 3px;
-    background: #121418;
-    border: 1px solid #282c34;
+    background: rgba(8, 14, 34, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(41, 112, 255, 0.2);
     border-radius: 7px;
-    gap: 3px
+    gap: 3px;
 }
 
 .gallery-tabs button {
     background: transparent;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 12px;
     padding: 7px 13px;
     min-height: 34px;
-    color: #8e96a4;
-    transition: background .2s, color .2s
+    color: #8c9bb5;
+    transition: background .2s, color .2s;
 }
 
 .gallery-tabs button.active {
-    background: #282d36;
-    color: #f0f3f7;
-    box-shadow: 0 1px 4px #0003
+    background: rgba(16, 28, 60, 0.9);
+    color: #ffffff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
 .gallery-tabs button:hover {
-    color: white
+    color: #ffffff;
+    background: rgba(18, 30, 64, 0.65);
 }
 
 .gallery-origin {
-    font-size: 9px;
+    font-size: 12px;
     color: #788292
 }
 
@@ -920,7 +993,7 @@ ul {
 
 .small-state {
     display: inline-block;
-    font-size: 9px;
+    font-size: 12px;
     line-height: 1.6;
     color: #99a6ba;
     margin-top: 7px
@@ -950,7 +1023,7 @@ ul {
 .studio-steps {
     display: flex;
     gap: 32px;
-    border-top: 1px solid #252b34;
+    border-top: 1px solid rgba(41, 112, 255, 0.2);
     padding: 18px 0 24px;
     color: #697586;
     font-size: 10px
@@ -963,7 +1036,7 @@ ul {
 }
 
 .studio-steps b {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     color: #8d98a8
 }
@@ -1000,8 +1073,8 @@ ul {
 }
 
 .architecture-board {
-    background: #0d1015;
-    border: 1px solid #272e3a;
+    background: rgba(10, 16, 36, 0.85);
+    border: 1px solid rgba(41, 112, 255, 0.22);
     border-radius: 12px;
     overflow: hidden;
     margin-top: 41px
@@ -1015,7 +1088,7 @@ ul {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 11px;
+    font-size: 12px;
     color: #c0c7d3;
     font-weight: 500
 }
@@ -1023,7 +1096,7 @@ ul {
 .lane-label small {
     margin-left: auto;
     color: #737f91;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 400
 }
 
@@ -1058,11 +1131,11 @@ ul {
 
 .system-stack span,
 .knowledge-stack span {
-    font-size: 11px;
+    font-size: 12px;
     color: #aab5c6;
     padding: 8px 14px;
-    background: #151b25;
-    border: 1px solid #283345;
+    background: rgba(16, 26, 56, 0.85);
+    border: 1px solid rgba(41, 112, 255, 0.26);
     border-radius: 5px;
     text-align: center
 }
@@ -1074,11 +1147,11 @@ ul {
 }
 
 .flow-node {
-    border: 1px solid #3e4d68;
+    border: 1px solid rgba(41, 112, 255, 0.28);
     border-radius: 7px;
     padding: 18px 13px;
     text-align: center;
-    background: #161e2c;
+    background: rgba(16, 26, 56, 0.85);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1102,7 +1175,7 @@ ul {
 }
 
 .flow-node small {
-    font-size: 10px;
+    font-size: 12px;
     color: #93a3bc;
     margin-top: 7px
 }
@@ -1110,8 +1183,8 @@ ul {
 .node-note {
     margin-top: 10px;
     color: #a9bad7;
-    font-size: 9px;
-    border-top: 1px solid #344158;
+    font-size: 12px;
+    border-top: 1px solid rgba(41, 112, 255, 0.2);
     padding-top: 7px;
     width: calc(100% - 12px)
 }
@@ -1122,8 +1195,8 @@ ul {
 }
 
 .output-stack>div {
-    border: 1px solid #283345;
-    background: #121923;
+    border: 1px solid rgba(41, 112, 255, 0.24);
+    background: rgba(14, 22, 48, 0.8);
     border-radius: 6px;
     display: grid;
     grid-template-columns: 20px 1fr;
@@ -1145,20 +1218,20 @@ ul {
 }
 
 .output-stack small {
-    font-size: 9px;
+    font-size: 12px;
     color: #8392a8
 }
 
 .architecture-divider {
     padding: 11px 30px;
-    border-top: 1px dashed #2d3540;
-    border-bottom: 1px dashed #2d3540;
+    border-top: 1px dashed rgba(41, 112, 255, 0.24);
+    border-bottom: 1px dashed rgba(41, 112, 255, 0.24);
     display: flex;
     justify-content: center;
     gap: 65px;
-    background: #10161c;
-    font-size: 9px;
-    color: #8e9fb1
+    background: rgba(10, 18, 38, 0.7);
+    font-size: 12px;
+    color: #9cb1cb
 }
 
 .architecture-divider span:before {
@@ -1173,7 +1246,7 @@ ul {
 
 .operations-row .flow-node {
     background: #14201d;
-    border-color: #324f44
+    border-color: rgba(32, 178, 170, 0.35)
 }
 
 .operations-row .flow-node>.icon {
@@ -1186,26 +1259,26 @@ ul {
 
 .operations-row .node-note {
     color: #a3beaf;
-    border-color: #304a3d
+    border-color: rgba(32, 178, 170, 0.25)
 }
 
 .operations-row .studio-node {
     background: #121917;
-    border-color: #293b33;
+    border-color: rgba(32, 178, 170, 0.28);
     min-height: 110px
 }
 
 .operations-row .knowledge-stack span {
     background: #121b18;
-    border-color: #293e34;
+    border-color: rgba(32, 178, 170, 0.3);
     color: #9bb1a3
 }
 
 .architecture-footnote {
     margin-top: 14px;
-    font-size: 10px;
+    font-size: 12px;
     color: #7f8c9e;
-    line-height: 1.9;
+    line-height: 1.5;
     max-width: 900px
 }
 
@@ -1246,7 +1319,7 @@ ul {
 }
 
 .legacy-grid small {
-    font-size: 10px;
+    font-size: 12px;
     color: #7c899b
 }
 
@@ -1262,7 +1335,7 @@ ul {
 }
 
 .roadmap-grid article {
-    border-top: 1px solid #424958;
+    border-top: 1px solid rgba(41, 112, 255, 0.24);
     padding-top: 19px
 }
 
@@ -1274,12 +1347,12 @@ ul {
 }
 
 .roadmap-top>span:first-child {
-    font-size: 11px;
+    font-size: 12px;
     color: #8090a6
 }
 
 .roadmap-top .status-pill {
-    font-size: 9px;
+    font-size: 12px;
     color: #929eaf
 }
 
@@ -1290,7 +1363,7 @@ ul {
 }
 
 .roadmap-grid article>p {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.85;
     color: #a2aab8
 }
@@ -1299,7 +1372,7 @@ ul {
     margin-top: 24px;
     display: grid;
     gap: 8px;
-    font-size: 10px;
+    font-size: 12px;
     color: #7e8ca0
 }
 
@@ -1322,11 +1395,11 @@ ul {
 }
 
 .faq-list details {
-    border-bottom: 1px solid #242c36
+    border-bottom: 1px solid rgba(41, 112, 255, 0.2)
 }
 
 .faq-list details:first-child {
-    border-top: 1px solid #242c36
+    border-top: 1px solid rgba(41, 112, 255, 0.2)
 }
 
 .faq-list summary {
@@ -1336,7 +1409,7 @@ ul {
     display: flex;
     justify-content: space-between;
     gap: 15px;
-    font-size: 13px;
+    font-size: 14px;
     color: #bcc6d4;
     word-break: keep-all;
     align-items: center
@@ -1360,7 +1433,7 @@ ul {
 .faq-list details>p {
     padding: 0 25px 22px 0;
     font-size: 12px;
-    line-height: 1.9;
+    line-height: 1.5;
     color: #8a99ac
 }
 
@@ -1373,7 +1446,7 @@ ul {
 }
 
 .contact-section .eyebrow {
-    font-size: 9px;
+    font-size: 12px;
     color: #8390a3;
     margin-bottom: 22px
 }
@@ -1384,7 +1457,7 @@ ul {
 }
 
 .contact-section>div>p:last-child {
-    font-size: 13px;
+    font-size: 14px;
     color: #8897ab;
     margin-top: 20px
 }
@@ -1408,12 +1481,12 @@ ul {
 }
 
 .contact-address {
-    font-size: 10px;
+    font-size: 12px;
     color: #71829c
 }
 
 .site-footer {
-    border-top: 1px solid #232b37;
+    border-top: 1px solid rgba(41, 112, 255, 0.2);
     padding: 35px 0 30px;
     color: #7b899d
 }
@@ -1450,7 +1523,7 @@ ul {
 }
 
 .footer-top>span {
-    font-size: 11px;
+    font-size: 12px;
     color: #8b98aa
 }
 
@@ -1484,7 +1557,7 @@ ul {
 }
 
 .footer-disclaimer {
-    font-size: 9px;
+    font-size: 12px;
     line-height: 1.85;
     color: #737f91;
     max-width: 1050px;
@@ -1493,8 +1566,8 @@ ul {
 
 .image-dialog {
     padding: 0;
-    background: #10151d;
-    border: 1px solid #3c495d;
+    background: rgba(8, 14, 34, 0.96);
+    border: 1px solid rgba(41, 112, 255, 0.3);
     border-radius: 10px;
     color: #cbd4e2;
     width: min(1600px, 96vw);
@@ -1514,8 +1587,8 @@ ul {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px 0 20px;
-    font-size: 13px;
-    border-bottom: 1px solid #2c3544
+    font-size: 14px;
+    border-bottom: 1px solid rgba(41, 112, 255, 0.2)
 }
 
 .lightbox-top button {
@@ -1541,7 +1614,7 @@ ul {
 }
 
 .image-dialog>p {
-    font-size: 10px;
+    font-size: 12px;
     padding: 13px 20px;
     color: #8392a7
 }
@@ -1647,7 +1720,7 @@ ul {
     }
 
     .nav-contact {
-        font-size: 10px;
+        font-size: 12px;
         gap: 8px;
         padding: 0 10px
     }
@@ -1670,7 +1743,7 @@ ul {
 
     .product-tab {
         padding: 14px 10px;
-        font-size: 11px;
+        font-size: 12px;
         gap: 7px
     }
 
@@ -1696,12 +1769,12 @@ ul {
     }
 
     .existing-system-strip p {
-        font-size: 10px;
+        font-size: 12px;
         min-width: 110px
     }
 
     .showcase-caption {
-        font-size: 9px;
+        font-size: 12px;
         gap: 15px
     }
 
@@ -1717,7 +1790,17 @@ ul {
         padding-bottom: 52px
     }
 
-    .intro-grid,
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .intro-desc,
+    .intro-grid>p {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
     .product-heading {
         gap: 32px
     }
@@ -1729,7 +1812,7 @@ ul {
 
     .intro-grid>p,
     .product-heading>div>p {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.85
     }
 
@@ -1898,7 +1981,7 @@ ul {
     }
 
     .faq-list summary {
-        font-size: 11px;
+        font-size: 12px;
         padding: 17px 0
     }
 
@@ -1975,7 +2058,7 @@ ul {
     .nav-contact {
         border: none;
         background: transparent;
-        font-size: 11px;
+        font-size: 12px;
         padding: 0;
         gap: 6px
     }
@@ -2001,9 +2084,9 @@ ul {
         top: 60px;
         left: 0;
         right: 0;
-        background: #11151c;
+        background: rgba(8, 14, 34, 0.96);
         padding: 16px 22px 22px;
-        border-bottom: 1px solid #333d4e;
+        border-bottom: 1px solid rgba(41, 112, 255, 0.22);
         flex-direction: column;
         align-items: stretch;
         gap: 0
@@ -2055,14 +2138,14 @@ ul {
     }
 
     .button {
-        font-size: 11px;
+        font-size: 12px;
         min-height: 40px;
         padding: 0 13px;
         gap: 15px
     }
 
     .hero-actions>.text-link {
-        font-size: 10px;
+        font-size: 12px;
         gap: 6px
     }
 
@@ -2084,7 +2167,7 @@ ul {
     .product-tab {
         flex: 0 0 auto;
         padding: 12px 13px;
-        font-size: 10px;
+        font-size: 12px;
         min-height: 46px;
         gap: 6px
     }
@@ -2154,7 +2237,7 @@ ul {
     .showcase-caption {
         display: block;
         margin-top: 11px;
-        font-size: 9px;
+        font-size: 12px;
         line-height: 1.8
     }
 
@@ -2172,7 +2255,7 @@ ul {
     }
 
     .existing-system-strip p {
-        font-size: 10px;
+        font-size: 12px;
         line-height: 1.8
     }
 
@@ -2223,8 +2306,8 @@ ul {
 
     .intro-grid>p,
     .product-heading>div>p {
-        font-size: 13px;
-        line-height: 1.9;
+        font-size: 14px;
+        line-height: 1.5;
         padding-top: 0
     }
 
@@ -2292,7 +2375,7 @@ ul {
     }
 
     .product-heading .text-link {
-        font-size: 11px;
+        font-size: 12px;
         margin-top: 13px
     }
 
@@ -2320,7 +2403,7 @@ ul {
     }
 
     .product-figure figcaption {
-        font-size: 9px;
+        font-size: 12px;
         margin-top: 9px;
         line-height: 1.8
     }
@@ -2348,7 +2431,7 @@ ul {
     .agent-workflow>div {
         grid-template-columns: 23px 1fr;
         padding: 14px 0;
-        border-bottom: 1px solid #202733
+        border-bottom: 1px solid rgba(41, 112, 255, 0.18)
     }
 
     .agent-workflow h3 {
@@ -2356,7 +2439,7 @@ ul {
     }
 
     .agent-workflow p {
-        font-size: 11px;
+        font-size: 12px;
         margin-top: 6px
     }
 
@@ -2389,7 +2472,7 @@ ul {
     }
 
     .gallery-tabs button {
-        font-size: 9px;
+        font-size: 12px;
         padding: 5px 9px;
         min-height: 31px
     }
@@ -2413,7 +2496,7 @@ ul {
     }
 
     .feature-notes h3 {
-        font-size: 13px;
+        font-size: 14px;
         margin-bottom: 7px
     }
 
@@ -2463,7 +2546,7 @@ ul {
     }
 
     .studio-bottom .text-link {
-        font-size: 10px;
+        font-size: 12px;
         margin-top: 16px
     }
 
@@ -2496,7 +2579,7 @@ ul {
     }
 
     .system-stack span {
-        font-size: 9px;
+        font-size: 12px;
         flex: 1;
         padding: 8px 2px
     }
@@ -2575,12 +2658,12 @@ ul {
     }
 
     .knowledge-stack span {
-        font-size: 9px;
+        font-size: 12px;
         padding: 11px 3px
     }
 
     .architecture-footnote {
-        font-size: 9px;
+        font-size: 12px;
         line-height: 1.9
     }
 
@@ -2639,7 +2722,7 @@ ul {
 
     .roadmap-grid ul {
         margin-top: 15px;
-        font-size: 10px;
+        font-size: 12px;
         gap: 6px
     }
 
@@ -2718,7 +2801,7 @@ ul {
     .footer-top>span {
         order: 3;
         width: 100%;
-        font-size: 10px;
+        font-size: 12px;
         margin-top: -4px
     }
 
@@ -2786,7 +2869,7 @@ ul {
 
 @media(min-width:801px) {
     .hero {
-        padding-top: 48px
+        padding-top: 68px
     }
 
     .hero h1 {
@@ -2821,13 +2904,13 @@ ul {
     }
 
     .hero-showcase {
-        padding-top: 40px
+        padding-top: 50px
     }
 }
 
 @media(min-width:1600px) {
     .hero {
-        padding-top: 60px
+        padding-top: 80px
     }
 
     .hero h1 {
@@ -2839,7 +2922,7 @@ ul {
     }
 
     .hero-showcase {
-        padding-top: 48px
+        padding-top: 58px
     }
 }
 
@@ -2851,5 +2934,95 @@ ul {
     .hero-actions {
         margin-top: 22px;
         margin-bottom: 0
+    }
+}
+
+/* Hero Background with Parallax & Scroll Fade */
+.hero-bg {
+    position: fixed;
+    top: 130px;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    will-change: opacity;
+    opacity: 1;
+}
+
+.hero-bg-inner {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('assets/hero-particle-bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 55%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 55%, rgba(0, 0, 0, 0) 100%);
+    transform-origin: 50% 35%;
+    will-change: transform;
+}
+
+/* AhnLab Orbit Graphic: 483x512 full size, 200px below hero-particle-bg top (130px + 200px = 330px) */
+.hero-orbit {
+    position: fixed;
+    top: 330px;
+    left: 0px;
+    width: 600px;
+    height: 612px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    will-change: opacity;
+}
+
+.hero-orbit img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: orbitRotate 60s linear infinite;
+    filter: drop-shadow(0 0 24px rgba(41, 112, 255, 0.22));
+}
+
+@keyframes orbitRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+main {
+    position: relative;
+    z-index: 1;
+}
+
+@media(max-width: 1280px) {
+    .hero-orbit {
+        right: -60px;
+        width: 480px;
+        height: 508px;
+    }
+}
+
+@media(max-width: 800px) {
+    .hero-bg {
+        top: 90px;
+        height: 85vh;
+    }
+
+    .hero-orbit {
+        top: 240px;
+        right: -80px;
+        width: 336px;
+        height: 356px;
     }
 }

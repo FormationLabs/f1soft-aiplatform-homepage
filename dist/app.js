@@ -32,3 +32,203 @@ document.querySelectorAll('[data-lightbox]').forEach(button=>button.addEventList
 document.getElementById('close-lightbox').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
 dialog.addEventListener('close',()=>{document.body.classList.remove('body-locked');returnFocus?.focus({preventScroll:true});});
+
+// Hero Background & Orbit Scroll Coordination
+const heroBg = document.querySelector('.hero-bg');
+const heroBgInner = document.querySelector('.hero-bg-inner');
+const heroOrbit = document.querySelector('.hero-orbit');
+if (heroBg || heroOrbit) {
+  let ticking = false;
+  function updateScrollVisuals() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const fadeDistance = 600;
+
+    // 1. Top Particle Background: visible at top, zooms in and disappears by 600px
+    if (heroBg) {
+      if (scrollY > fadeDistance) {
+        if (heroBg.style.visibility !== 'hidden') {
+          heroBg.style.visibility = 'hidden';
+          heroBg.style.opacity = '0';
+        }
+      } else {
+        if (heroBg.style.visibility !== 'visible') {
+          heroBg.style.visibility = 'visible';
+        }
+        const progress = scrollY / fadeDistance;
+        heroBg.style.opacity = (1 - progress).toFixed(3);
+        const translateY = -scrollY * 0.22;
+        const scale = 1 + progress * 0.32;
+        if (heroBgInner) {
+          heroBgInner.style.transform = 'translate3d(0, ' + translateY.toFixed(1) + 'px, 0) scale(' + scale.toFixed(3) + ')';
+        }
+      }
+    }
+
+    // 2. Orbit Graphic: hidden at top, reveals smoothly as the top image disappears (380px -> 620px)
+    if (heroOrbit) {
+      const orbitFadeStart = 380;
+      const orbitFadeEnd = 620;
+      if (scrollY <= orbitFadeStart) {
+        if (heroOrbit.style.visibility !== 'hidden') {
+          heroOrbit.style.visibility = 'hidden';
+          heroOrbit.style.opacity = '0';
+        }
+      } else if (scrollY >= orbitFadeEnd) {
+        if (heroOrbit.style.visibility !== 'visible') {
+          heroOrbit.style.visibility = 'visible';
+        }
+        heroOrbit.style.opacity = '0.88';
+      } else {
+        if (heroOrbit.style.visibility !== 'visible') {
+          heroOrbit.style.visibility = 'visible';
+        }
+        const orbitProgress = (scrollY - orbitFadeStart) / (orbitFadeEnd - orbitFadeStart);
+        heroOrbit.style.opacity = (orbitProgress * 0.88).toFixed(3);
+      }
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateScrollVisuals);
+      ticking = true;
+    }
+  }, { passive: true });
+  updateScrollVisuals();
+}
+
+// AhnLab-style Inertial Smooth Scrolling (Momentum Scroll)
+(function initSmoothScroll() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+  const isTouchOnly = 'ontouchstart' in window && !window.matchMedia('(pointer: fine)').matches;
+  if (isTouchOnly) return;
+
+  let currentY = window.scrollY;
+  let targetY = window.scrollY;
+  let isRunning = false;
+  const damping = 0.082; // Luxurious momentum damping factor
+
+  function getMaxScroll() {
+    return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  function tick() {
+    const maxScroll = getMaxScroll();
+    targetY = Math.max(0, Math.min(targetY, maxScroll));
+    const diff = targetY - currentY;
+
+    if (Math.abs(diff) > 0.4) {
+      currentY += diff * damping;
+      window.scrollTo(0, currentY);
+      requestAnimationFrame(tick);
+    } else {
+      currentY = targetY;
+      window.scrollTo(0, currentY);
+      isRunning = false;
+    }
+  }
+
+  function start() {
+    if (!isRunning) {
+      isRunning = true;
+      requestAnimationFrame(tick);
+    }
+  }
+
+  window.addEventListener('wheel', (e) => {
+    if (document.body.classList.contains('body-locked')) return;
+
+    let el = e.target;
+    while (el && el !== document.body && el !== document.documentElement) {
+      const overflowY = window.getComputedStyle(el).overflowY;
+      if ((overflowY === 'auto' || overflowY === 'scroll') && el.scrollHeight > el.clientHeight) {
+        return;
+      }
+      el = el.parentElement;
+    }
+
+    e.preventDefault();
+
+    let delta = e.deltaY;
+    if (e.deltaMode === 1) delta *= 40;
+    else if (e.deltaMode === 2) delta *= window.innerHeight;
+
+    const isMouseWheel = Math.abs(delta) >= 50;
+    const multiplier = isMouseWheel ? 1.15 : 1.0;
+
+    targetY += delta * multiplier;
+    targetY = Math.max(0, Math.min(targetY, getMaxScroll()));
+    start();
+  }, { passive: false });
+
+  window.addEventListener('scroll', () => {
+    if (!isRunning) {
+      currentY = targetY = window.scrollY;
+    }
+  }, { passive: true });
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+      if (href === '#' || href === '#top') {
+        e.preventDefault();
+        targetY = 0;
+        start();
+        return;
+      }
+      const targetElem = document.querySelector(href);
+      if (targetElem) {
+        e.preventDefault();
+        const headerOffset = 80;
+        const elemTop = targetElem.getBoundingClientRect().top + window.scrollY;
+        targetY = Math.max(0, elemTop - headerOffset);
+        start();
+      }
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+    if (document.body.classList.contains('body-locked')) return;
+
+    let delta = 0;
+    switch (e.key) {
+      case 'ArrowDown': delta = 100; break;
+      case 'ArrowUp': delta = -100; break;
+      case 'PageDown': delta = window.innerHeight * 0.85; break;
+      case 'PageUp': delta = -window.innerHeight * 0.85; break;
+      case 'Space':
+        delta = e.shiftKey ? -window.innerHeight * 0.75 : window.innerHeight * 0.75;
+        break;
+      case 'Home':
+        targetY = 0;
+        start();
+        e.preventDefault();
+        return;
+      case 'End':
+        targetY = getMaxScroll();
+        start();
+        e.preventDefault();
+        return;
+      default: return;
+    }
+
+    if (delta !== 0) {
+      e.preventDefault();
+      targetY += delta;
+      targetY = Math.max(0, Math.min(targetY, getMaxScroll()));
+      start();
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    currentY = targetY = window.scrollY;
+  });
+})();
+
+
